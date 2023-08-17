@@ -2,7 +2,7 @@
  * @Author: yangchao
  * @Date: 2023-08-16 15:18:17
  * @LastEditors: yangchao yangchao@kgcure.com
- * @LastEditTime: 2023-08-17 17:20:19
+ * @LastEditTime: 2023-08-17 17:34:28
  * @Description: 这里是描述
 -->
 <head>
@@ -17,27 +17,26 @@
 <!-- 3d文字 -->
 <script src="lib/aframe-text-geometry-component.min.js"></script>
 <script>
-    AFRAME.registerComponent('handle-events', {
-        init: function () {
-            var el = this.el; // <a-box>
-            el.addEventListener('mouseenter', function () {
-                el.setAttribute('color', '#24CAFF');
-            });
-            el.addEventListener('mouseleave', function () {
-                el.setAttribute('color', '#EF2D5E');
-            });
-            el.addEventListener('click', function () {
-                alert(77777777);
-                el.setAttribute('scale', {
-                    x: 2,
-                    y: 1,
-                    z: 2
-                });
-            });
-        }
-    });
+    // AFRAME.registerComponent('handle-events', {
+    //     init: function () {
+    //         var el = this.el; // <a-box>
+    //         el.addEventListener('mouseenter', function () {
+    //             el.setAttribute('color', '#24CAFF');
+    //         });
+    //         el.addEventListener('mouseleave', function () {
+    //             el.setAttribute('color', '#EF2D5E');
+    //         });
+    //         el.addEventListener('click', function () {
+    //             alert(77777777);
+    //             el.setAttribute('scale', {
+    //                 x: 2,
+    //                 y: 1,
+    //                 z: 2
+    //             });
+    //         });
+    //     }
+    // });
 </script>
-
 
 <!-- style for the loader -->
 <style>
@@ -76,30 +75,6 @@
         arjs="trackingMethod: best; sourceType: webcam;debugUIEnabled: false;"
         id="app-scene"
     >
-        <!-- <a-box
-            position="-1 0.5 -3"
-            rotation="0 45 0"
-            color="#4CC3D9"
-            id="obj02"
-            handle-events
-        >
-        </a-box> -->
-
-        <!-- <a-sphere position="0 1.25 -5" radius="1.25" color="#EF2D5E"></a-sphere>
-        <a-cylinder
-            position="1 0.75 -3"
-            radius="0.5"
-            height="1.5"
-            color="#FFC65D"
-        ></a-cylinder>
-        <a-plane
-            position="0 0 -4"
-            rotation="-90 0 0"
-            width="4"
-            height="4"
-            color="#7BC8A4"
-        ></a-plane>
-        <a-sky color="#ECECEC"></a-sky> -->
         <!-- 图片训练后文件路径，不带文件拓展名！ -->
         <a-assets>
             <!-- 医生3d模型 -->
@@ -108,7 +83,7 @@
                 src="model/machine01/doctor.obj"
             ></a-asset-item>
             <!-- 字体 -->
-            <a-asset-item
+            <!-- <a-asset-item
                 id="font_first"
                 src="assets/machine01/machine01_01-msdf.json"
             ></a-asset-item>
@@ -119,7 +94,7 @@
             <a-asset-item
                 id="font03"
                 src="assets/machine01/machine01_03-msdf.json"
-            ></a-asset-item>
+            ></a-asset-item> -->
             <!-- 图片 -->
             <img id="img01" src="model/machine01/order01.png" />
             <img id="img02" src="model/machine01/order02.png" />
