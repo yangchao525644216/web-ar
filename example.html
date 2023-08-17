@@ -1,0 +1,173 @@
+<!--
+ * @Author: yangchao
+ * @Date: 2023-08-16 15:18:17
+ * @LastEditors: yangchao yangchao@kgcure.com
+ * @LastEditTime: 2023-08-17 15:57:05
+ * @Description: 这里是描述
+-->
+<head>
+    <title>罗氏诊断_AR助手</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+</head>
+
+<!-- <script src="https://cdn.jsdelivr.net/gh/aframevr/aframe@1c2407b26c61958baa93967b5412487cd94b290b/dist/aframe-master.min.js"></script> -->
+<script src="lib/aframe.min.js"></script>
+<script src="lib/aframe-ar-nft.js"></script>
+<script src="gestures.js"></script>
+<!-- 3d文字 -->
+<script src="lib/aframe-text-geometry-component.min.js"></script>
+<script>
+    AFRAME.registerComponent('handle-events', {
+        init: function () {
+            var el = this.el; // <a-box>
+            el.addEventListener('mouseenter', function () {
+                el.setAttribute('color', '#24CAFF');
+            });
+            el.addEventListener('mouseleave', function () {
+                el.setAttribute('color', '#EF2D5E');
+            });
+            el.addEventListener('click', function () {
+                alert(77777777);
+                el.setAttribute('scale', {
+                    x: 2,
+                    y: 1,
+                    z: 2
+                });
+            });
+        }
+    });
+</script>
+
+
+<!-- style for the loader -->
+<style>
+    .arjs-loader {
+        height: 100%;
+        width: 100%;
+        position: absolute;
+        top: 0;
+        left: 0;
+        background-color: rgba(0, 0, 0, 0.8);
+        z-index: 9999;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .arjs-loader div {
+        text-align: center;
+        font-size: 1.25em;
+        color: white;
+    }
+</style>
+
+<body style="margin: 0px; overflow: hidden">
+    <!-- minimal loader shown until image descriptors are loaded. Loading may take a while according to the device computational power -->
+    <div class="arjs-loader">
+        <div>正在加载AR模型，请稍候...</div>
+    </div>
+
+    <!-- a-frame scene -->
+    <a-scene
+        vr-mode-ui="enabled: false;"
+        gesture-detector
+        renderer="logarithmicDepthBuffer: true;"
+        embedded
+        arjs="trackingMethod: best; sourceType: webcam;debugUIEnabled: false;"
+        id="app-scene"
+    >
+        <!-- <a-box
+            position="-1 0.5 -3"
+            rotation="0 45 0"
+            color="#4CC3D9"
+            id="obj02"
+            handle-events
+        >
+        </a-box> -->
+
+        <!-- <a-sphere position="0 1.25 -5" radius="1.25" color="#EF2D5E"></a-sphere>
+        <a-cylinder
+            position="1 0.75 -3"
+            radius="0.5"
+            height="1.5"
+            color="#FFC65D"
+        ></a-cylinder>
+        <a-plane
+            position="0 0 -4"
+            rotation="-90 0 0"
+            width="4"
+            height="4"
+            color="#7BC8A4"
+        ></a-plane>
+        <a-sky color="#ECECEC"></a-sky> -->
+        <!-- 图片训练后文件路径，不带文件拓展名！ -->
+        <a-assets>
+            <!-- 医生3d模型 -->
+            <a-asset-item
+                id="doctor"
+                src="model/machine01/doctor.obj"
+            ></a-asset-item>
+            <!-- 字体 -->
+            <a-asset-item
+                id="font_first"
+                src="assets/machine01/machine01_01-msdf.json"
+            ></a-asset-item>
+            <a-asset-item
+                id="font02"
+                src="assets/machine01/machine01_02-msdf.json"
+            ></a-asset-item>
+            <a-asset-item
+                id="font03"
+                src="assets/machine01/machine01_03-msdf.json"
+            ></a-asset-item>
+            <!-- 图片 -->
+            <img id="img01" src="model/machine01/order01.png" />
+            <img id="img02" src="model/machine01/order02.png" />
+            <img id="img03" src="model/machine01/order03.png" />
+        </a-assets>
+        <a-nft
+            type="nft"
+            url="nft/machine01/machine01"
+            smooth="true"
+            smoothCount="10"
+            smoothTolerance=".01"
+            smoothThreshold="5"
+        >
+            <a-entity
+                obj-model="obj: #doctor;"
+                scale="0.5 0.5 0.5"
+                position="100 -100 -100"
+                rotation="-90 0 0"
+                id="obj01"
+            ></a-entity>
+            <a-entity
+                text-geometry="value:hi,please follow me;"
+                material="color: red;"
+                position="-100 -100 -100"
+                rotation="-90 0 0"
+                scale="50 50 50"
+                id="obj02"
+            ></a-entity>
+            <a-entity
+                geometry="primitive: plane;"
+                material="src:#img01"
+                position="0 -202 105"
+                rotation="-135 0 0"
+                scale="200 200 200"
+                id="cover01"
+            ></a-entity>
+        </a-nft>
+
+        <!-- static camera that moves according to the device movemenents -->
+        <a-entity></a-entity>
+    </a-scene>
+    <script>
+        let img01 = document.querySelector('#cover01');
+        let i = 0;
+        setInterval(() => {
+            i++;
+            if (i > 3) i = 1;
+            img01.setAttribute('material', {src: `#img0${i}`});
+        }, 5 * 1000);
+    </script>
+</body>
